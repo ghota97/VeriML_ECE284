@@ -44,9 +44,10 @@ begin
         inst_e[1] <= inst_w[1];
         if (|inst_w])
             out_e <= in_w;
+            c_q   <= in_n;
 
         else if (inst_w[0] && load_ready_q) begin
-            b_q <= in_w[bw-1:0];
+            b_q <= in_w;
             load_ready_q <= 1'b0;
         end
 

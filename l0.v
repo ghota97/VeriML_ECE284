@@ -14,61 +14,59 @@ module l0 (clk, in, out, rd, wr, o_full, reset, o_ready);
   output o_full;
   output o_ready;
 
-  reg [2:0] counter;
+  reg [4:0] counter;
   wire [row-1:0] empty;
   wire [row-1:0] full;
   reg [row-1:0] rd_en;
   reg [row-1:0] wr_en;
   
+
+  assign o_ready = &(empty) ;
+  assign o_full  = |(full);
+
   genvar i;
-
-    assign o_ready = &(empty) ;
-    assign o_full  = |(full);
-
-
   for (i=0; i<row ; i=i+1) begin : row_num
       fifo_depth64 #(.bw(bw)) fifo_instance (
-	 .rd_clk(clk),
-	 .wr_clk(clk),
-	 .rd(rd_en[i]),
-          .wr(wr_en[i]),
-          .o_empty(empty[i]),
-          .o_full(full[i]),
-          .in(in[(i+1)*bw-1 : i*bw]),
-          .out(out[(i+1)*bw-1 : i*bw]),
+         .rd_clk(clk),
+         .wr_clk(clk),
+         .rd(rd_en[i]),
+         .wr(wr_en[i]),
+         .o_empty(empty[i]),
+         .o_full(full[i]),
+         .in(in[(i+1)*bw-1 : i*bw]),
+         .out(out[(i+1)*bw-1 : i*bw]),
          .reset(reset));
   end
 
 
   always @ (posedge clk) begin
-   if (reset) begin
+   if (reset) 
       rd_en <= 8'b00000000;
-   end
-   else
-        `ifdef version1
+  else if(mode == 0)
       /////////////// version1: read all row at a time ////////////////
-           rd_en <= {(row){rd}};
-      ///////////////////////////////////////////////////////
-      `else
+       rd_en <= {(row){rd}};
+  else if (mode ==1)
       //////////////// version2: read 1 row at a time /////////////////
-          rd_en <= {rd_en[row-2:0],rd};
-      ///////////////////////////////////////////////////////
-      `endif
-    end
+      rd_en <= {rd_en[row-2:0],rd};
+  end
 
   always @ (posedge clk) begin
    if (reset) begin
       wr_en <= 8'b00000000;
    end
    else
-       if(counter == 0)
-           wr_en <= {wr_en[row-2:0],wr};
+       if(counter == 0)begin
+           if (wr_en == 0)
+               wr_en <= wr;
+           else
+               wr_en <= wr_en<<1;
+       end
     end
 
     always@(posedge clk) begin
         if(reset) begin
             counter <= 0;
-            else if (counter == 3'd7)
+            else if (counter == col-1)
                 counter <=0;
             else 
                 counter <= counter +1'b1;
