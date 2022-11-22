@@ -1,16 +1,16 @@
-module core(clk,reset, inst_w, mode, in_l0,rd_l0,wr_l0,psum_mem_bus,o_full,o_ready,o_valid,out_l0,full_l0,ready_l0);
+module core(clk,reset, inst_w, mode, in_l0,rd_l0,wr_l0,rd_ofifo,psum_mem_bus,o_full,o_ready,o_valid,out_l0,full_l0,ready_l0);
     
     parameter psum_bw = 16;
     parameter bw = 4;
-    parameter row = 8;
-    parameter col=8;
+    parameter row = 4;
+    parameter col=4;
     
     input clk,reset;
     input [1:0] inst_w;
     input mode;  
     input [row*bw-1:0]in_l0;
-    input [row-1:0]rd_l0;
-    input [row-1:0]wr_l0;
+    input rd_l0;
+    input wr_l0;
     input rd_ofifo;
 
     output [col*psum_bw-1:0] psum_mem_bus;
@@ -21,12 +21,12 @@ module core(clk,reset, inst_w, mode, in_l0,rd_l0,wr_l0,psum_mem_bus,o_full,o_rea
     output full_l0;
     output ready_l0; 
     
-
-    wire  [psum*col-1:0] mac_arr_psum_bus;
+    reg  [psum_bw*col-1:0] init_psum = 0;
+    wire  [psum_bw*col-1:0] mac_arr_psum_bus;
     wire [col-1:0] valid_bus;
      
     
-    l0 #(.bw(bw),.row(row)) l0_instance(
+    l0 #(.bw(bw),.row(row),.col(col)) l0_instance(
         .clk(clk), 
         .reset(reset),
         .in(in_l0), 
@@ -57,7 +57,7 @@ module core(clk,reset, inst_w, mode, in_l0,rd_l0,wr_l0,psum_mem_bus,o_full,o_rea
         .clk(clk),
         .reset(reset),
         .in_w(out_l0), 
-        .in_n(0), 
+        .in_n(init_psum), 
         .mode(mode),
         .inst_w(inst_w), 
         .out_s(mac_arr_psum_bus), 

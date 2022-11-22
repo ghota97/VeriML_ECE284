@@ -1,13 +1,15 @@
 // Created by prof. Mingu Kang @VVIP Lab in UCSD ECE department
 // Please do not spread this code without permission 
-module l0 (clk, in, out, rd, wr, o_full, reset, o_ready);
+module l0 (clk, in, out, rd, mode,wr, o_full, reset, o_ready);
 
   parameter row  = 8;
   parameter bw = 4;
+  parameter col = 4;
 
   input  clk;
   input  wr;
   input  rd;
+  input mode;
   input  reset;
   input  [row*bw-1:0] in;
   output [row*bw-1:0] out;
@@ -21,7 +23,7 @@ module l0 (clk, in, out, rd, wr, o_full, reset, o_ready);
   reg [row-1:0] wr_en;
   
 
-  assign o_ready = &(empty) ;
+  assign o_ready = ~o_full ;
   assign o_full  = |(full);
 
   genvar i;
@@ -64,12 +66,11 @@ module l0 (clk, in, out, rd, wr, o_full, reset, o_ready);
     end
 
     always@(posedge clk) begin
-        if(reset) begin
+        if(reset) 
             counter <= 0;
-            else if (counter == col-1)
-                counter <=0;
-            else 
-                counter <= counter +1'b1;
-        end
+        else if (counter == col-1)
+            counter <=0;
+        else 
+            counter <= counter +1'b1;
     end
 endmodule
