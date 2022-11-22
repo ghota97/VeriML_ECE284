@@ -43,7 +43,7 @@ module l0 (clk, in, out, rd, mode,wr, o_full, reset, o_ready);
 
   always @ (posedge clk) begin
    if (reset) 
-      rd_en <= 8'b00000000;
+      rd_en <= 0;
   else if(mode == 0)
       /////////////// version1: read all row at a time ////////////////
        rd_en <= {(row){rd}};
@@ -53,17 +53,22 @@ module l0 (clk, in, out, rd, mode,wr, o_full, reset, o_ready);
   end
 
   always @ (posedge clk) begin
-   if (reset) begin
-      wr_en <= 8'b00000000;
-   end
-   else
-       if(counter == 0)begin
+      if (reset) begin
+          wr_en <= 8'b00000000;
+      end
+      else if (mode == 1) begin
+         if(counter == 0)begin
            if (wr_en == 0)
                wr_en <= wr;
            else
                wr_en <= wr_en<<1;
-       end
-    end
+         end
+
+      end
+      else begin
+	  wr_en <= {(row){wr}};
+      end
+   end
 
     always@(posedge clk) begin
         if(reset) 

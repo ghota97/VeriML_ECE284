@@ -12,10 +12,9 @@ parameter total_cycle = 4;
 parameter total_cycle_2nd = 8;
 
 wire mode ;
-wire [1:0] inst_w;
+reg [1:0] inst_w;
 wire [col*psum_bw-1:0] psum_bus;
 assign mode = 0;
-assign inst_w = 2'b01;
 reg clk = 0;
 reg rd = 0;
 reg rd_ofifo = 0;
@@ -35,53 +34,6 @@ integer u;
 
 integer  w[total_cycle-1:0][col-1:0];
 
-
-
-function [3:0] w_bin ;
-  input integer  weight ;
-  begin
-
-    if (weight>-1)
-     w_bin[5] = 0;
-    else begin
-     w_bin[5] = 1;
-     weight = weight + 32;
-    end
-    if (weight>17)
-     w_bin[4] = 0;
-    else begin
-     w_bin[4] = 1;
-     weight = weight -16;
-    end
-
-    if (weight>7)
-     w_bin[3] = 0;
-    else begin
-     w_bin[3] = 1;
-     weight = weight - 8;
-    end
-
-    if (weight>3) begin
-     w_bin[2] = 1;
-     weight = weight - 4;
-    end
-    else 
-     w_bin[2] = 0;
-
-    if (weight>1) begin
-     w_bin[1] = 1;
-     weight = weight - 2;
-    end
-    else 
-     w_bin[1] = 0;
-
-    if (weight>0) 
-     w_bin[0] = 1;
-    else 
-     w_bin[0] = 0;
-
-  end
-endfunction
 
 core #(.bw(bw),.row(row),.col(col),.psum_bw(psum_bw)) core_instance(
 	.clk(clk),
@@ -117,6 +69,8 @@ initial begin
   $display("-------------------- 1st Computation start --------------------");
   
   wr = 1;
+     #1 clk = 1'b1;
+     #1 clk = 1'b0;
   for (i=0; i<total_cycle; i=i+1) begin
 
      for (j=0; j<col; j=j+1) begin
@@ -124,7 +78,7 @@ initial begin
         w_scan_file = $fscanf(w_file, "%d\n", captured_data);
 	$display(captured_data);
         w[i][j] = captured_data;
-        binary = w_bin(w[i][j]);  
+//        binary = w_bin(w[i][j]);  
         //w_vector_bin = {binary, w_vector_bin[bw*col-1:bw]};
         w_vector_bin = {captured_data,w_vector_bin[bw*col-1:bw]};//{binary, w_vector_bin[bw*col-1:bw]};
      end
@@ -138,18 +92,21 @@ initial begin
   #1 clk = 1'b1;
   #1 clk = 1'b0;
 
-//
-//  rd = 1;
-//
-//  for (i=0; i<2*total_cycle; i=i+1) begin
-//     #1 clk = 1'b1;
-//     #1 clk = 1'b0;
-//  end
-//  rd = 0;
-//
-//  $display("-------------------- 1st Computation completed --------------------");
-//
-//
+
+  rd = 1;
+
+  #1 clk = 1'b1;
+  #1 clk = 1'b0;
+  inst_w = 2'b01;
+  for (i=0; i<2*total_cycle; i=i+1) begin
+     #1 clk = 1'b1;
+     #1 clk = 1'b0;
+  end
+  rd = 0;
+
+  $display("-------------------- 1st Computation completed --------------------");
+
+
 //
 //
 //  $display("-------------------- 2nd Computation start --------------------");
