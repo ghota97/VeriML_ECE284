@@ -10,4 +10,5 @@ l0.v
 mac.v	 
 mac_row.v    
 ofifo.v	  
+sfu.v
 tb.v		
