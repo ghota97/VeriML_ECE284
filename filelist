@@ -1,3 +1,4 @@
+corelet.v
 core.v
 fifo_depth64.v  
 fifo_mux_16_1.v	
@@ -11,4 +12,5 @@ mac.v
 mac_row.v    
 ofifo.v	  
 sfu.v
+sram_128b_w2048.v
 tb.v		

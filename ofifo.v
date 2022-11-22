@@ -28,7 +28,7 @@ module ofifo (clk, in, out, rd, wr, o_full, reset, o_ready, o_valid);
       fifo_depth64 #(.bw(psum_bw)) fifo_instance (
          .rd_clk(clk),
          .wr_clk(clk),
-         .rd(rd_en),
+         .rd(rd),
          .wr(wr[i]),
          .o_empty(empty[i]),
          .o_full(full[i]),
@@ -37,11 +37,4 @@ module ofifo (clk, in, out, rd, wr, o_full, reset, o_ready, o_valid);
          .reset(reset));
   end
 
-
-  always @ (posedge clk) begin
-   if (reset) 
-      rd_en <= 0;
-   else  
-     rd_en <= rd;
-  end
 endmodule
