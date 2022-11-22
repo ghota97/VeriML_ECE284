@@ -18,14 +18,14 @@ output reg [bw-1:0] out_e; //activation
 output [psum_bw-1:0] out_s;
     
     
-reg [bw-1:0] b_q;//weight
+reg [bw-1:0]a_q, b_q;//weight
 reg [psum_bw-1:0] c_q;//psum
     
 reg load_ready_q;
 
 
 mac #(.bw(bw), .psum_bw(psum_bw)) mac_instance (
-        .a(out_e), 
+        .a(a_q), 
         .b(b_q),
         .c(c_q),
 	.out(out_s)
@@ -41,9 +41,11 @@ always@(posedge clk) begin
 
     else begin
         inst_e[1] <= inst_w[1];
-        if (|inst_w)begin
+        if (|inst_w)
             out_e <= in_w;
+	if(inst_w[1])begin
             c_q   <= in_n;
+            a_q   <= in_w;
 	end
         if (inst_w[0] && load_ready_q) begin
             b_q <= in_w;

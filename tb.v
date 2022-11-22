@@ -4,17 +4,21 @@
 
 module tb;
 
-parameter bw = 6;
+parameter bw = 7;
 parameter col = 4;
 parameter row = 4;
 parameter psum_bw = 16;
 parameter total_cycle = 4;
 parameter total_cycle_2nd = 8;
 
-wire mode ;
+wire psum_rd;
+wire psum_wr;
+wire acc,relu;
+wire [col*psum_bw-1:0]psum_mem_dout;
+wire [col*psum_bw-1:0]psum_mem_din;
+reg mode ;
 reg [1:0] inst_w;
 wire [col*psum_bw-1:0] psum_bus;
-assign mode = 0;
 reg clk = 0;
 reg rd = 0;
 reg rd_ofifo = 0;
@@ -25,6 +29,7 @@ wire [bw*col-1:0] out;
 wire full, ready,o_ready,o_valid,o_full;
 
 integer w_file ; // file handler
+integer a_file ; // file handler
 integer w_scan_file ; // file handler
 integer captured_data;
 reg [bw-1:0] binary;
@@ -36,6 +41,8 @@ integer  w[total_cycle-1:0][col-1:0];
 
 
 core #(.bw(bw),.row(row),.col(col),.psum_bw(psum_bw)) core_instance(
+	.acc(acc),
+	.relu(relu),
 	.clk(clk),
 	.reset(reset),
 	.inst_w(inst_w),
@@ -43,18 +50,20 @@ core #(.bw(bw),.row(row),.col(col),.psum_bw(psum_bw)) core_instance(
 	.in_l0(w_vector_bin),
 	.rd_l0(rd),
 	.wr_l0(wr),
-	.rd_ofifo(rd_ofifo),
-	.psum_mem_bus(psum_bus),
 	.o_full(o_full),
 	.o_ready(o_ready),
-	.o_valid(o_valid),
 	.out_l0(out),
 	.full_l0(full),
-	.ready_l0(ready)
+	.ready_l0(ready),
+	.psum_rd(psum_rd),
+	.psum_wr(psum_wr),
+	.psum_mem_dout(psum_mem_dout),
+	.psum_mem_din(psum_mem_din)
 );
 
 initial begin 
 
+  mode = 0;
   w_file = $fopen("b_data.txt", "r");  //weight data
 
   $dumpfile("tb.vcd");
@@ -76,7 +85,6 @@ initial begin
      for (j=0; j<col; j=j+1) begin
 
         w_scan_file = $fscanf(w_file, "%d\n", captured_data);
-	$display(captured_data);
         w[i][j] = captured_data;
 //        binary = w_bin(w[i][j]);  
         //w_vector_bin = {binary, w_vector_bin[bw*col-1:bw]};
@@ -95,58 +103,69 @@ initial begin
 
   rd = 1;
 
+  inst_w = 2'b01;
   #1 clk = 1'b1;
   #1 clk = 1'b0;
-  inst_w = 2'b01;
-  for (i=0; i<2*total_cycle; i=i+1) begin
+  for (i=0; i<total_cycle; i=i+1) begin
      #1 clk = 1'b1;
      #1 clk = 1'b0;
   end
   rd = 0;
 
-  $display("-------------------- 1st Computation completed --------------------");
+  $display("-------------------- Weight Loading first interation completed --------------------");
 
 
-//
-//
-//  $display("-------------------- 2nd Computation start --------------------");
-//
-//  wr = 1;
-//  for (i=0; i<total_cycle_2nd; i=i+1) begin
-//
-//     for (j=0; j<col; j=j+1) begin
-//
-//        w_scan_file = $fscanf(w_file, "%d\n", captured_data);
-//        w[i][j] = captured_data;
+  a_file = $fopen("a_data.txt", "r");  //weight data
+
+  #1 clk = 1'b0;  
+  #1 clk = 1'b1;  
+
+  #1 clk = 1'b0;  
+  #1 clk = 1'b1;  
+  #1 clk = 1'b0;  
+  #1 clk = 1'b1;  
+  #1 clk = 1'b0;  
+  #1 clk = 1'b1;  
+  #1 clk = 1'b0;  
+  #1 clk = 1'b1;  
+  #1 clk = 1'b0;  
+  #1 clk = 1'b1;  
+  wr = 1;
+  #1 clk = 1'b1;
+  #1 clk = 1'b0;
+  for (i=0; i<total_cycle_2nd; i=i+1) begin
+     for (j=0; j<col; j=j+1) begin
+        w_scan_file = $fscanf(a_file, "%d\n", captured_data);
+	$display(captured_data);
+        w[i][j] = captured_data;
 //        binary = w_bin(w[i][j]);  
-//        w_vector_bin = {binary, w_vector_bin[bw*col-1:bw]};
-//     end
-//
-//     #1 clk = 1'b1;
-//     #1 clk = 1'b0;
-//
-//  end
-//
-//  wr = 0;
-//  #1 clk = 1'b1;
-//  #1 clk = 1'b0;
-//
-//
-//  rd = 1;
-//
-//  for (i=0; i<2*total_cycle_2nd; i=i+1) begin
-//     #1 clk = 1'b1;
-//     #1 clk = 1'b0;
-//  end
-//  rd = 0;
-//
-//  $display("-------------------- 2nd Computation completed --------------------");
-//
-//  #10 $finish;
-//
+        //w_vector_bin = {binary, w_vector_bin[bw*col-1:bw]};
+        w_vector_bin = {captured_data,w_vector_bin[bw*col-1:bw]};//{binary, w_vector_bin[bw*col-1:bw]};
+     end
 
+     #1 clk = 1'b1;
+     #1 clk = 1'b0;
+
+  end
+
+  wr = 0;
+  #1 clk = 1'b1;
+  #1 clk = 1'b0;
+
+  mode = 1;
+  rd = 1;
+
+  #1 clk = 1'b1;
+  #1 clk = 1'b0;
+  inst_w = 2'b10;
+
+  for (i=0; i<2*total_cycle_2nd; i=i+1) begin
+     #1 clk = 1'b1;
+     #1 clk = 1'b0;
+  end
+  rd = 0;
+  $display("-------------------- 1st Computation completed --------------------");
 end
-
 endmodule
 
 

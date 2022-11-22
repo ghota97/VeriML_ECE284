@@ -35,17 +35,18 @@ module mac_array (clk, reset, out_s, in_w, in_n, mode, inst_w, valid);
          .in_n(in_n_bus[psum_bw*col*i-1:psum_bw*col*(i-1)]),
          .valid(valid_bus[col*i-1:col*(i-1)]),
          .out_s(in_n_bus[psum_bw*col*(i+1)-1:psum_bw*col*(i)]));
-      always @(*) begin
-          if (mode == 0)
-              inst_w_bus[2*i-1:2*(i-1)] = inst_w;
-      end
   end
-
   generate
-      for (i = 2; i < 2*row; i = i + 2) begin 
+      for (i = 0; i < 2*row; i = i + 2) begin 
         always @(posedge clk) begin
-            if(mode == 1)
-              inst_w_bus[i+1:i] <= inst_w_bus[i-1:i-2];
+	    if(i == 0) 
+		inst_w_bus[1:0] <= inst_w;
+	    else begin
+            	if(mode == 1)
+              	    inst_w_bus[i+1:i] <= inst_w_bus[i-1:i-2];
+		else
+		    inst_w_bus[i+1:i] <= inst_w;
+	    end
         end
     end
   endgenerate
