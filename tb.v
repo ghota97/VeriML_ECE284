@@ -10,8 +10,6 @@ module tb;
 	parameter col = 4;
 	parameter row = 4;
 	parameter psum_bw = 16;
-	parameter total_cycle = 4;
-	parameter total_cycle_2nd = 8;
 	
 	reg cen = 1;
 	reg acc = 1;
@@ -40,7 +38,7 @@ module tb;
 	integer j; 
 	integer u; 
 	
-	integer  w[total_cycle-1:0][col-1:0];
+	integer  w[row-1:0][col-1:0];
 	
 	
 	core #(.bw(bw),.row(row),.col(col),.psum_bw(psum_bw),.num_inp(num_inp),.num(num)) core_instance(
@@ -62,86 +60,71 @@ module tb;
 	);
 	
 	integer k;
-	initial begin 
-	 acc = 1;
-	 mode = 0;
-	 $dumpfile("tb.vcd");
-	 $dumpvars(0,tb);
-	 #1 clk = 1'b0;  
-	 #1 reset = 1'b1;
-	 #1 clk = 1'b1;  
-	 #1 clk = 1'b0;
-	 #1 reset = 1'b0;
-	 #1 cen = 0;
-	 w_file = $fopen("b_data.txt", "r");  //weight data
-	 wr = 1;
-	 #1 clk = 1'b1;
-	 #1 clk = 1'b0;
-	 for (i=0; i<total_cycle; i=i+1) begin
-	    for (j=0; j<col; j=j+1) begin
-	       w_scan_file = $fscanf(w_file, "%d\n", captured_data);
-	       w_vector_bin = {captured_data,w_vector_bin[bw*col-1:bw]};//{binary, w_vector_bin[bw*col-1:bw]};
-	    end
-	    #1 clk = 1'b1;
-	    #1 clk = 1'b0;
-	 end
-	
-	 wr = 0;
-	 #1 clk = 1'b1;
-	 #1 clk = 1'b0;
-	 
-	 rd = 1;
-	
-	 inst_w = 2'b01;
-  	 
-         #1 clk = 1'b1;
-	 #1 clk = 1'b0;
-	 for (i=0; i<total_cycle; i=i+1) begin
-	    #1 clk = 1'b1;
-	    #1 clk = 1'b0;
-	 end
-	 rd = 0;
-	 $display("--------------------Weight Loading first interation completed --------------------");
-  	 for ( k = 0; k<3; k = k+1) begin
-  		wr = 1;
-	  	mode = 0;
-	  	#1 clk = 1'b1;
-	  	#1 clk = 1'b0;
-	 	a_file = $fopen("a_data.txt", "r");  //activation data
-		for (i=0; i<total_cycle_2nd; i=i+1) begin
-	  	   for (j=0; j<col; j=j+1) begin
-	  	      w_scan_file = $fscanf(a_file, "%d\n", captured_data);
-	  	      w_vector_bin = {captured_data,w_vector_bin[bw*col-1:bw]};//{binary, w_vector_bin[bw*col-1:bw]};
-	  	   end
-	  	   #1 clk = 1'b1;
-	  	   #1 clk = 1'b0;
-	  	   if(i==total_cycle_2nd-2)
-			wr = 0;
-	  	end
-	
-		$fclose(a_file);
-	  	#1 clk = 1'b1;
-	  	#1 clk = 1'b0;
-	
-	  	mode = 1;
-	  	rd = 1;
-	
-	  	inst_w = 2'b10;
-	
-	  	for (i=0; i<total_cycle_2nd; i=i+1) begin
-	  	   #1 clk = 1'b1;
-	  	   #1 clk = 1'b0;
-	  	end
-	  	rd = 0;
-	  	inst_w = 2'b00;
-	  	$display("-------------------- %d Computation completed --------------------",k);
-	  	for (i=0; i<2*total_cycle_2nd; i=i+1) begin
-	  	   #1 clk = 1'b1;
-	  	   #1 clk = 1'b0;
-	  	end
-	  end
-	end
+	integer iter,iters;
 
+	initial begin 
+	 	acc = 1;
+	 	$dumpfile("tb.vcd");
+	 	$dumpvars(0,tb);
+	 	#1 clk = 1'b0;  
+	 	#1 reset = 1'b1;
+	 	#1 clk = 1'b1;  
+	 	#1 clk = 1'b0;
+	 	#1 reset = 1'b0;
+	 	#1 cen = 0;
+
+		for( iter = 0; iter<9;iter=iter+1) begin
+		    fork
+		    	begin
+				wr = 1; mode = 0; 
+				#1 clk = 1'b1 ; #1 clk = 1'b0;
+		 		w_file = $fopen("b_data.txt", "r");  //weight data
+		 		w_vector_bin = 0;
+		 		for (i=0; i<row; i=i+1) begin
+		 		   for (j=0; j<col; j=j+1) begin
+		 		      w_scan_file = $fscanf(w_file, "%d\n", captured_data);
+		 		      w_vector_bin = {captured_data,w_vector_bin[bw*col-1:bw]};//{binary, w_vector_bin[bw*col-1:bw]};
+		 		   end
+				#1 clk = 1'b1 ; #1 clk = 1'b0;
+				end
+		 		a_file = $fopen("a_data.txt", "r");  //weight data
+				w_vector_bin = 0;
+		 		for (i=0; i<num_inp; i=i+1) begin
+		 		   for (j=0; j<col; j=j+1) begin
+		 		      w_scan_file = $fscanf(a_file, "%d\n", captured_data);
+		 		      w_vector_bin = {captured_data,w_vector_bin[bw*col-1:bw]};//{binary, w_vector_bin[bw*col-1:bw]};
+		 		   end
+				   #1 clk = 1'b1 ; #1 clk = 1'b0;
+				   if(i==num_inp-2)
+				   	wr = 0;
+				end
+			end
+		        begin
+				#1 clk = 1'b1 ; #1 clk = 1'b0;
+				rd = 1; 
+				for(k=0;k<row;k=k+1)begin
+					inst_w = 2'b01;	
+					mode = 0;
+					#1 clk = 1'b1 ; #1 clk = 1'b0;
+				end
+				rd = 0;	
+				#1 clk = 1'b1 ; #1 clk = 1'b0;
+				for(k=0;k<num_inp;k=k+1)begin
+					inst_w = 2'b10;	
+					mode = 1;
+					rd = 1;	
+					#1 clk = 1'b1 ; #1 clk = 1'b0;
+				end
+				inst_w = 2'b00;
+				rd = 0;	
+				#1 clk = 1'b1 ; #1 clk = 1'b0;
+				for(k=0;k<col+row+1;k=k+1)begin
+				    #1 clk = 1'b1 ; #1 clk = 1'b0;
+				end
+			end
+		  join
+	    end
+	end
 endmodule
 
 
