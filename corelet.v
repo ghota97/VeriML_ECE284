@@ -20,7 +20,7 @@ module corelet(clk,reset, acc,relu,inst_w, mode, in_l0,rd_l0,wr_l0,o_full,o_read
     output ready_l0; 
     output psum_mem_rd;
     output psum_wr;
-    output [col*psum_bw-1:0]psum_mem_dout;
+    input [col*psum_bw-1:0]psum_mem_dout;
     output [col*psum_bw-1:0]psum_mem_din;   
  
     reg  [psum_bw*col-1:0] init_psum = 0;

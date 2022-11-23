@@ -36,6 +36,7 @@ always@(posedge clk) begin
         inst_e <= 2'b0;
         load_ready_q <= 1'b1;
 	b_q<=0;
+	a_q<=0;
 	out_e<=0;
     end
 
@@ -55,6 +56,7 @@ always@(posedge clk) begin
         else if (~load_ready_q) begin
             inst_e[0] <= inst_w[0];
         end
+	
     end
 end
 

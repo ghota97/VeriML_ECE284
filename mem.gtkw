@@ -1,0 +1,47 @@
+[*]
+[*] GTKWave Analyzer v3.3.61 (w)1999-2014 BSI
+[*] Wed Nov 23 00:32:56 2022
+[*]
+[dumpfile] "/home/linux/ieng6/ee284fa22/vmediset/VeriML_ECE284/tb.vcd"
+[dumpfile_mtime] "Wed Nov 23 00:25:00 2022"
+[dumpfile_size] 1177579
+[savefile] "/home/linux/ieng6/ee284fa22/vmediset/VeriML_ECE284/mem.gtkw"
+[timestart] 63
+[size] 1536 657
+[pos] -1 -1
+*-2.810259 65 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb.
+[treeopen] tb.core_instance.
+[treeopen] tb.core_instance.corelet_instance.
+[treeopen] tb.core_instance.corelet_instance.l0_instance.row_num[0].
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[1].mac_row_instance.
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[1].mac_row_instance.col_num[1].
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[1].mac_row_instance.col_num[4].
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[2].mac_row_instance.
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[2].mac_row_instance.col_num[1].
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[3].mac_row_instance.
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[3].mac_row_instance.col_num[1].
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[4].
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[2].
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[3].
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[4].
+[sst_width] 229
+[signals_width] 349
+[sst_expanded] 1
+[sst_vpaned_height] 287
+@22
+tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.out_s[15:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[2].mac_tile_instance.out_s[15:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[3].mac_tile_instance.out_s[15:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[4].mac_tile_instance.out_s[15:0]
+@29
+tb.core_instance.corelet_instance.sfu_instance.ofifo_valid
+@22
+tb.core_instance.corelet_instance.sfu_instance.ofifo_dout[63:0]
+tb.core_instance.corelet_instance.sfu_instance.psum_mem_dout[63:0]
+tb.core_instance.corelet_instance.psum_mem_din[63:0]
+[pattern_trace] 1
+[pattern_trace] 0
