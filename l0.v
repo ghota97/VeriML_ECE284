@@ -53,29 +53,10 @@ module l0 (clk, in, out, rd, mode,wr, o_full, reset, o_ready);
   end
 
   always @ (posedge clk) begin
-      if (reset) begin
+      if (reset) 
           wr_en <= 8'b00000000;
-      end
-//      else if (mode == 1) begin
-//         if(counter == 0)begin
-//           if (wr_en == 0)
-//               wr_en <= wr;
-//           else
-//               wr_en <= wr_en<<1;
-//         end
-//
-//      end
-      else begin
+      else 
 	  wr_en <= {(row){wr}};
-      end
    end
 
-//    always@(posedge clk) begin
-//        if(reset) 
-//            counter <= 0;
-//        else if (counter == col-1)
-//            counter <=0;
-//        else 
-//            counter <= counter +1'b1;
-//    end
 endmodule

@@ -1,4 +1,5 @@
 corelet.v
+controller.v
 core.v
 fifo_depth64.v  
 fifo_mux_16_1.v	
