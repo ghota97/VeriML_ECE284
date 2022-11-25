@@ -1,64 +1,64 @@
-0005  ffd6  000e  ffef  fff5  0006  0012  0006   
-0019  ffe1  0006  fffb  ffea  fffe  0017  fff6   
-0015  ffdc  0000  0005  ffe0  fffc  0019  ffe5   
-0000  0000  0000  0000  0000  0000  0000  0000   
-0000  0000  0000  0000  0000  0000  0000  0000   
-001a  ffbe  0004  ffe4  fff6  000b  0023  fff2   
-0029  ffb4  fffe  ffef  ffe1  0005  002f  ffdb   
-ffed  ffab  000c  ffd9  0005  001a  001a  fffb   
-ffd6  ffb1  0013  ffda  0007  001c  000f  000a   
-fff0  ffd3  0014  ffea  fffa  000a  000a  0015   
-002c  ffd1  0009  fffa  ffe0  fffa  0024  ffef   
-001d  ffd6  000a  fffd  ffe1  fffa  001c  fff5   
-0018  ffe0  000b  fffe  ffe4  fffb  0017  fffa   
-0025  ffd5  0009  fff9  ffe3  fffc  0020  fff3   
-0026  ffce  0008  fffc  ffdd  fffa  0023  ffed   
-002e  ffaf  0000  fffa  ffce  ffff  0035  ffd1   
-fffb  ffe8  0010  0005  ffdf  fffd  000b  0003   
-fffa  fff0  0014  fffa  fff1  ffff  0004  0017   
-ffff  ffea  000c  fff1  ffff  0005  0007  000f   
-001f  ffd3  0000  fff5  ffed  0003  001f  ffe9   
-ffe5  ffe0  0007  fff1  0006  0010  0004  0000   
-ffe9  ffe3  000a  fff3  0006  000e  0005  0000   
-fffb  ffcf  0003  ffef  0003  0010  0014  ffeb   
-fff8  ffc6  ffff  fff7  fff7  000a  0015  ffe3   
-fffb  ffdd  0003  fffe  fff4  0002  000c  fff3   
-001e  ffe0  ffff  0001  ffeb  fffb  0019  ffe7   
-0033  ffe2  fffa  0007  ffdf  fff5  0021  ffdc   
-001d  fff2  fff9  0007  ffec  fff9  0012  ffe7   
-0016  ffea  fffb  fffc  fff7  0001  0012  ffec   
-0026  ffe2  fff7  0004  ffe8  fff9  001b  ffde   
-0020  ffe2  fffc  fffe  ffec  fffd  0019  ffe8   
-0026  ffc2  fff9  ffec  fff7  000b  0029  ffd7   
-0004  ffb4  0001  ffe8  fff9  0014  0023  ffde   
-ffd3  ffba  000c  ffe3  0008  001a  000b  ffff   
-ffec  ffd1  0012  ffec  fffc  000b  000a  000e   
-0025  ffd8  000a  fff7  ffe7  fffc  001e  fff8   
-0025  ffd3  ffff  0003  ffdd  fffa  0022  ffde   
-0000  0000  0000  0000  0000  0000  0000  0000   
-0000  0000  0000  0000  0000  0000  0000  0000   
-0013  ffd2  0003  ffeb  fffb  0009  0019  fff6   
-0030  ffd8  fffe  fffc  ffe4  fffc  0024  ffe2   
-0000  ffae  0007  ffda  000a  001c  0023  ffe8   
-ffc4  ffac  0014  ffda  0012  0026  000e  fffd   
-ffde  ffc2  0017  ffe8  fffa  0010  000b  0010   
-001e  ffcb  000d  fff2  ffe5  ffff  0020  fffb   
-001a  ffce  000d  fff6  ffe2  fffe  001e  fffa   
-0008  ffde  0011  fff8  ffea  fffe  0010  000a   
-0025  ffd5  0009  fff9  ffe3  fffc  0020  fff3   
-001e  ffce  0008  fff8  ffe2  fffe  0020  fff1   
-0025  ffc8  0005  fff7  ffde  ffff  0026  ffe9   
-ffff  ffdb  000d  fff3  fff2  0006  000f  0005   
-ffef  ffe3  000c  fff1  fffe  000a  0005  000c   
-fffb  fff3  0008  fff9  fffd  0003  0003  0009   
-0012  ffea  0000  fffa  fff7  0001  0010  fff5   
-0013  ffdb  fffd  fff2  ffff  0007  0016  ffec   
-0009  ffde  fffd  fff6  fffd  0006  0011  ffee   
-0030  ffc3  fff4  fff6  ffe9  0003  002c  ffce   
-fffe  ffbc  fffc  fff3  fff5  000d  001c  ffdb   
-ffe3  ffd4  0005  fff4  0000  000b  0005  fffd   
-001a  ffe3  0002  0000  ffe9  fffb  0016  fff0   
-0041  ffe0  fff7  0009  ffd8  fff4  0029  ffd1   
-0014  fff2  0000  0000  fff3  fffd  000e  fff5   
-0020  ffe1  fffa  0004  ffe4  fffa  001a  ffe2   
-001d  ffe9  fffc  0005  ffe7  fffa  0016  ffe7   
+     5   -42    14   -17   -11     6    18     6
+    25   -31     6    -5   -22    -2    23   -10
+    21   -36     0     5   -32    -4    25   -27
+     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0
+    26   -66     4   -28   -10    11    35   -14
+    41   -76    -2   -17   -31     5    47   -37
+   -19   -85    12   -39     5    26    26    -5
+   -42   -79    19   -38     7    28    15    10
+   -16   -45    20   -22    -6    10    10    21
+    44   -47     9    -6   -32    -6    36   -17
+    29   -42    10    -3   -31    -6    28   -11
+    24   -32    11    -2   -28    -5    23    -6
+    37   -43     9    -7   -29    -4    32   -13
+    38   -50     8    -4   -35    -6    35   -19
+    46   -81     0    -6   -50    -1    53   -47
+    -5   -24    16     5   -33    -3    11     3
+    -6   -16    20    -6   -15    -1     4    23
+    -1   -22    12   -15    -1     5     7    15
+    31   -45     0   -11   -19     3    31   -23
+   -27   -32     7   -15     6    16     4     0
+   -23   -29    10   -13     6    14     5     0
+    -5   -49     3   -17     3    16    20   -21
+    -8   -58    -1    -9    -9    10    21   -29
+    -5   -35     3    -2   -12     2    12   -13
+    30   -32    -1     1   -21    -5    25   -25
+    51   -30    -6     7   -33   -11    33   -36
+    29   -14    -7     7   -20    -7    18   -25
+    22   -22    -5    -4    -9     1    18   -20
+    38   -30    -9     4   -24    -7    27   -34
+    32   -30    -4    -2   -20    -3    25   -24
+    38   -62    -7   -20    -9    11    41   -41
+     4   -76     1   -24    -7    20    35   -34
+   -45   -70    12   -29     8    26    11    -1
+   -20   -47    18   -20    -4    11    10    14
+    37   -40    10    -9   -25    -4    30    -8
+    37   -45    -1     3   -35    -6    34   -34
+     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0
+    19   -46     3   -21    -5     9    25   -10
+    48   -40    -2    -4   -28    -4    36   -30
+     0   -82     7   -38    10    28    35   -24
+   -60   -84    20   -38    18    38    14    -3
+   -34   -62    23   -24    -6    16    11    16
+    30   -53    13   -14   -27    -1    32    -5
+    26   -50    13   -10   -30    -2    30    -6
+     8   -34    17    -8   -22    -2    16    10
+    37   -43     9    -7   -29    -4    32   -13
+    30   -50     8    -8   -30    -2    32   -15
+    37   -56     5    -9   -34    -1    38   -23
+    -1   -37    13   -13   -14     6    15     5
+   -17   -29    12   -15    -2    10     5    12
+    -5   -13     8    -7    -3     3     3     9
+    18   -22     0    -6    -9     1    16   -11
+    19   -37    -3   -14    -1     7    22   -20
+     9   -34    -3   -10    -3     6    17   -18
+    48   -61   -12   -10   -23     3    44   -50
+    -2   -68    -4   -13   -11    13    28   -37
+   -29   -44     5   -12     0    11     5    -3
+    26   -29     2     0   -23    -5    22   -16
+    65   -32    -9     9   -40   -12    41   -47
+    20   -14     0     0   -13    -3    14   -11
+    32   -31    -6     4   -28    -6    26   -30
+    29   -23    -4     5   -25    -6    22   -25
