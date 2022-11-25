@@ -9,7 +9,7 @@ module controller(clk,reset,start,wr,rd,mode,inst_w,compute_done,iter_done);
 	output reg [1:0]inst_w;
 	output reg compute_done;
 	
-	reg [4:0] iter,counter;
+	reg [7:0] iter,counter;
 	output reg iter_done;
 	reg started;
 	always@(posedge clk )
