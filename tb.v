@@ -6,7 +6,7 @@ module tb;
 
 	parameter num = 2048;	
 	parameter num_inp = 8;
-	parameter kij_len = 4;
+	parameter kij_len = 1;
 	parameter bw = 7;
 	parameter col = 4;
 	parameter row = 4;
@@ -32,8 +32,10 @@ module tb;
 	wire compute_done;	
 	integer w_file ; // file handler
 	integer a_file ; // file handler
+	integer out_file;
 	integer w_scan_file ; // file handler
 	integer captured_data;
+	integer captured_data_temp;
 	reg [bw-1:0] binary;
 	integer i; 
 	integer j; 
@@ -41,6 +43,7 @@ module tb;
 	wire iter_done;
 	reg start = 0;
 	integer  w[row-1:0][col-1:0];
+	reg psum_rd;
 	controller #(.row(row),.col(col),.num_inp(num_inp),.kij_len(kij_len)) controller_instance(
 	.start(start),
 	.clk(clk),
@@ -68,10 +71,12 @@ module tb;
 		.o_ready(o_ready),
 		.out_l0(out),
 		.full_l0(full),
-		.ready_l0(ready)
+		.ready_l0(ready),
+		.psum_rd(psum_rd),
+		.psum_mem_dout(psum_mem_dout)
 	);
 	
-	integer k;
+	integer k,p;
 	integer iter,iters;
 	always #1 clk = ~clk;
 	initial begin 
@@ -84,20 +89,24 @@ module tb;
 		#2 start = 1;
 		for( iter = 0; iter<kij_len;iter=iter+1) begin
 			#4;
-		 	w_file = $fopen("b_data.txt", "r");  //weight data
 		 	w_vector_bin = 0;
-			for( iters = 0; iters<iter;iters=iters+1) 
-		 		for (i=0; i<row; i=i+1) 
-		 	   		for (j=0; j<col; j=j+1) 
-		 	      			w_scan_file = $fscanf(w_file, "%d\n", captured_data);
-			
-		 	for (i=0; i<row; i=i+1) begin
-		 	   for (j=0; j<col; j=j+1) begin
-		 	      w_scan_file = $fscanf(w_file, "%d\n", captured_data);
+			for(k=0;k <col;k=k+1)begin
+		 	   w_file = $fopen("b_data.txt", "r");  //weight data
+		 	   for (i=0; i<row; i=i+1) begin
+				for(p=0;p<=k;p=p+1)
+		 	            w_scan_file = $fscanf(w_file, "%d\n", captured_data);
+		 	      for (j=0; j<col-k-1; j=j+1) begin
+		 	         w_scan_file = $fscanf(w_file, "%d\n", captured_data_temp);
+		 	      end
 		 	      w_vector_bin = {captured_data,w_vector_bin[bw*col-1:bw]};//{binary, w_vector_bin[bw*col-1:bw]};
 		 	   end
+			   $display(w_vector_bin[bw*1-1:bw*0]);
+			   $display(w_vector_bin[bw*2-1:bw*1]);
+			   $display(w_vector_bin[bw*3-1:bw*2]);
+			   $display(w_vector_bin[bw*4-1:bw*3]);
+			   $display("---");
 		 	   #2;
-		 	end
+			end
 			$fclose(w_file);
 		 	a_file = $fopen("a_data.txt", "r");  //activation data
 		 	w_vector_bin = 0;
@@ -113,6 +122,22 @@ module tb;
  			#2 reset = 1'b1;
 	 		#2 reset = 1'b0;
 	    end
+	    wait(compute_done);
+	    psum_rd = 1;
+		#2;
+	    $display("reading from psum to output.txt");
+ 	    out_file = $fopen("output_psum.txt","w");		
+	    for (i=0; i <num_inp; i++)begin
+		$display("%h",psum_mem_dout);
+		$fwrite(out_file,"%d  ",psum_mem_dout[(0+1)*psum_bw-1:psum_bw*0]);
+		$fwrite(out_file,"%d  ",psum_mem_dout[(1+1)*psum_bw-1:psum_bw*1]);
+		$fwrite(out_file,"%d  ",psum_mem_dout[(2+1)*psum_bw-1:psum_bw*2]);
+		$fwrite(out_file,"%d  ",psum_mem_dout[(3+1)*psum_bw-1:psum_bw*3]);
+		$fwrite(out_file," \n");
+	        #2;
+	    end
+	    psum_rd = 0;
+		
 	    $finish;
 	end
 endmodule

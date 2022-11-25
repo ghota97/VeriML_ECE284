@@ -1,4 +1,4 @@
-module core(acc,relu,clk,reset,inst_w,mode,in_l0,rd_l0,wr_l0,cen,o_full,o_ready,out_l0,full_l0,ready_l0);
+module core(acc,relu,clk,reset,inst_w,mode,in_l0,rd_l0,wr_l0,cen,o_full,o_ready,out_l0,full_l0,ready_l0,psum_rd,psum_mem_dout);
 parameter num = 2048;	
 parameter num_inp = 8;
 parameter psum_bw = 16;
@@ -6,6 +6,8 @@ parameter bw = 4;
 parameter row = 4;
 parameter col=4;
  
+input psum_rd;
+reg psum_rd_q;
 input acc,relu;
 input clk,reset;
 input [1:0] inst_w;
@@ -20,8 +22,10 @@ output [row*bw-1:0]out_l0;
 output full_l0;
 output ready_l0; 
 wire psum_mem_rd;
+reg psum_mem_rd_q;
 wire psum_wr;
-wire [col*psum_bw-1:0]psum_mem_dout;
+reg psum_wr_q;
+output [col*psum_bw-1:0]psum_mem_dout;
 wire [col*psum_bw-1:0]psum_mem_din;   
 reg [10:0] psum_mem_addr; 
 reg [10:0] psum_mem_addr_q; 
@@ -50,7 +54,7 @@ corelet #(.psum_bw(psum_bw),.bw(bw),.row(row),.col(col)) corelet_instance(
 sram_128b_w2048 #(.num(num)) psum_sram_instance(
 	.CLK(clk),
 	.WEN(psum_wr),
-	.REN(psum_mem_rd),
+	.REN(psum_mem_rd | psum_rd),
 	.CEN(cen),
 	.D(psum_mem_din),
 	.RA(psum_mem_addr),
@@ -59,9 +63,14 @@ sram_128b_w2048 #(.num(num)) psum_sram_instance(
 );
 
 always @(posedge clk) begin
+	psum_mem_rd_q <= psum_mem_rd;
+	psum_rd_q <= psum_rd;
+	psum_wr_q <= psum_wr;
+    end
+always @(posedge clk) begin
     if(reset)
 	psum_mem_addr <= 0;
-    else if(psum_mem_rd) 
+    else if(psum_mem_rd | psum_rd_q) 
     	if (psum_mem_addr >= num_inp-1)
 		psum_mem_addr <= 0;
 	else 
