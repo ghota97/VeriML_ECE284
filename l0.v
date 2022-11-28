@@ -4,7 +4,7 @@ module l0 (clk, in, out, rd, mode,wr, o_full, reset, o_ready);
 
   parameter row  = 8;
   parameter bw = 4;
-  parameter col = 4;
+  parameter col = 8;
 
   input  clk;
   input  wr;

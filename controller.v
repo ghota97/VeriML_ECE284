@@ -1,8 +1,8 @@
 module controller(clk,reset,start,wr,rd,mode,inst_w,compute_done,iter_done);
-	parameter num_inp = 8;
-	parameter col = 4;
-	parameter row = 4;
-	parameter kij_len = 9;
+	parameter num_inp = 64;
+	parameter col = 8;
+	parameter row = 8;
+	parameter kij_len = 1;
 
 	input clk,reset,start;
 	output reg wr,rd,mode;
@@ -40,9 +40,12 @@ module controller(clk,reset,start,wr,rd,mode,inst_w,compute_done,iter_done);
 		else if(counter == 2*(num_inp+row+1))begin
 			counter <=0;
 			iter_done <=1;
+			$display("Iter Done Value =%d \n",iter_done);
 		end
-		else	
+		else	begin
+			$display("Counter Value =%d \n",counter);
 			counter <= counter +1'b1;
+			end
 	end
 
 	always@ (posedge clk)begin

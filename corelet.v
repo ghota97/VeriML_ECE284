@@ -1,4 +1,4 @@
-module corelet(clk,reset, acc,relu,inst_w, mode, in_l0,rd_l0,wr_l0,o_full,o_ready,out_l0,full_l0,ready_l0,psum_mem_rd,psum_wr,psum_mem_dout,psum_mem_din);
+module corelet(clk,reset,acc,relu,inst_w, mode, in_l0,rd_l0,wr_l0,o_full,o_ready,out_l0,full_l0,ready_l0,psum_mem_rd,psum_wr,psum_mem_dout,psum_mem_din);
     
     parameter psum_bw = 16;
     parameter bw = 4;
@@ -9,7 +9,7 @@ module corelet(clk,reset, acc,relu,inst_w, mode, in_l0,rd_l0,wr_l0,o_full,o_read
     input clk,reset;
     input [1:0] inst_w;
     input mode;  
-    input [row*bw-1:0]in_l0;
+    input [31:0] in_l0;
     input rd_l0;
     input wr_l0;
 
