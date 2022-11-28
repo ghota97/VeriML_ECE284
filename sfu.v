@@ -23,7 +23,7 @@ module sfu (clk, reset, acc, relu, ofifo_valid, ofifo_rd, ofifo_dout, psum_mem_r
 	for (i = 0; i < col; i=i+1) begin: acc_col
 		always @(posedge clk) begin
 			if(acc) psum_mem_din[(i+1)*psum_bw-1:i*psum_bw] <= psum_mem_dout[(i+1)*psum_bw-1:i*psum_bw] + ofifo_dout[(i+1)*psum_bw-1:i*psum_bw];
-			//if(acc) psum_mem_din[(i+1)*psum_bw-1:i*psum_bw] <= ofifo_dout[(i+1)*psum_bw-1:i*psum_bw];
+		//	if(acc) psum_mem_din[(i+1)*psum_bw-1:i*psum_bw] <= ofifo_dout[(i+1)*psum_bw-1:i*psum_bw];
 		        if(relu) psum_mem_din[(i+1)*psum_bw-1:i*psum_bw] <= (psum_mem_dout[(i+1)*psum_bw-1:i*psum_bw] > 0)?psum_mem_dout[(i+1)*psum_bw-1:i*psum_bw]:{(psum_bw){1'b0}};  	
 		end
 	

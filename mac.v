@@ -29,7 +29,7 @@ wire [psum_bw-1:0] product;
 //multiplier multiplier_instance(.p(product),.a(a),.b(b));
 //assign out = c + product;
 assign product = $signed({{(psum_bw-bw){1'b0}},a}) * {{(psum_bw-bw){b[bw-1]}},b};
-carry_select_adder_16bit carry_select_adder_16bit_instance( .a(c),.b(product),.cin(1'b0),.sum(out),.cout());
-//assign out = c + product;
+//carry_select_adder_16bit carry_select_adder_16bit_instance( .a(c),.b(product),.cin(1'b0),.sum(out),.cout());
+assign out = c + product;
 
 endmodule

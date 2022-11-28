@@ -1,22 +1,22 @@
 [*]
 [*] GTKWave Analyzer v3.3.61 (w)1999-2014 BSI
-[*] Wed Nov 23 19:59:20 2022
+[*] Mon Nov 28 04:17:24 2022
 [*]
 [dumpfile] "/home/linux/ieng6/ee284fa22/vmediset/VeriML_ECE284/tb.vcd"
-[dumpfile_mtime] "Wed Nov 23 19:58:20 2022"
-[dumpfile_size] 3439025
+[dumpfile_mtime] "Mon Nov 28 04:08:29 2022"
+[dumpfile_size] 7432512
 [savefile] "/home/linux/ieng6/ee284fa22/vmediset/VeriML_ECE284/flow.gtkw"
 [timestart] 0
-[size] 1536 657
-[pos] -1 -1
-*-6.832466 87 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[size] 1536 601
+[pos] -51 -1
+*-5.832466 29 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] tb.
 [treeopen] tb.core_instance.
 [treeopen] tb.core_instance.corelet_instance.
 [treeopen] tb.core_instance.corelet_instance.l0_instance.
 [treeopen] tb.core_instance.corelet_instance.l0_instance.row_num[0].
 [treeopen] tb.core_instance.corelet_instance.mac_array_instance.
-[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[1].mac_row_instance.
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[1].
 [treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[1].mac_row_instance.col_num[1].
 [treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[1].mac_row_instance.col_num[4].
 [treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[2].mac_row_instance.
@@ -25,71 +25,46 @@
 [treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[3].mac_row_instance.col_num[1].
 [treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.
 [treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].
-[sst_width] 229
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[5].mac_row_instance.
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[5].mac_row_instance.col_num[1].
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[6].mac_row_instance.
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[6].mac_row_instance.col_num[1].
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[7].mac_row_instance.
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[7].mac_row_instance.col_num[1].
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[8].
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[8].mac_row_instance.
+[treeopen] tb.core_instance.corelet_instance.mac_array_instance.row_num[8].mac_row_instance.col_num[1].
+[sst_width] 421
 [signals_width] 178
 [sst_expanded] 1
-[sst_vpaned_height] 327
-@28
-tb.clk
-@29
-tb.reset
-@24
-tb.core_instance.corelet_instance.l0_instance.row_num[0].fifo_instance.in[6:0]
-tb.core_instance.corelet_instance.l0_instance.row_num[0].fifo_instance.out[6:0]
-@28
-tb.core_instance.corelet_instance.l0_instance.wr
-tb.rd
-@8024
-tb.controller_instance.counter[4:0]
-@28
-tb.inst_w[1:0]
-@8022
-tb.controller_instance.iter[4:0]
-@28
-tb.controller_instance.iter_done
-tb.mode
-@24
+[sst_vpaned_height] 292
+@420
+tb.core_instance.corelet_instance.mode
+tb.core_instance.corelet_instance.clk
+tb.core_instance.corelet_instance.o_valid
+tb.core_instance.corelet_instance.mac_array_instance.row_num[1].mac_row_instance.col_num[1].mac_tile_instance.a_q[3:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[1].mac_row_instance.col_num[1].mac_tile_instance.b_q[3:0]
 tb.core_instance.corelet_instance.mac_array_instance.row_num[1].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-tb.core_instance.corelet_instance.mac_array_instance.row_num[1].mac_row_instance.col_num[1].mac_tile_instance.a_q[6:0]
-tb.core_instance.corelet_instance.mac_array_instance.row_num[1].mac_row_instance.col_num[1].mac_tile_instance.b_q[6:0]
-tb.core_instance.corelet_instance.mac_array_instance.row_num[1].mac_row_instance.col_num[1].mac_tile_instance.out_s[15:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[2].mac_row_instance.col_num[1].mac_tile_instance.a_q[3:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[2].mac_row_instance.col_num[1].mac_tile_instance.b_q[3:0]
 tb.core_instance.corelet_instance.mac_array_instance.row_num[2].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-tb.core_instance.corelet_instance.mac_array_instance.row_num[2].mac_row_instance.col_num[1].mac_tile_instance.a_q[6:0]
-tb.core_instance.corelet_instance.mac_array_instance.row_num[2].mac_row_instance.col_num[1].mac_tile_instance.b_q[6:0]
-tb.core_instance.corelet_instance.mac_array_instance.row_num[2].mac_row_instance.col_num[1].mac_tile_instance.out_s[15:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[3].mac_row_instance.col_num[1].mac_tile_instance.a_q[3:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[3].mac_row_instance.col_num[1].mac_tile_instance.b_q[3:0]
 tb.core_instance.corelet_instance.mac_array_instance.row_num[3].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-tb.core_instance.corelet_instance.mac_array_instance.row_num[3].mac_row_instance.col_num[1].mac_tile_instance.a_q[6:0]
-tb.core_instance.corelet_instance.mac_array_instance.row_num[3].mac_row_instance.col_num[1].mac_tile_instance.b_q[6:0]
-tb.core_instance.corelet_instance.mac_array_instance.row_num[3].mac_row_instance.col_num[1].mac_tile_instance.out_s[15:0]
-@c00024
+tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.a_q[3:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.b_q[3:0]
 tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-@28
-(0)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(1)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(2)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(3)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(4)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(5)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(6)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(7)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(8)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(9)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(10)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(11)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(12)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(13)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(14)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-(15)tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
-@1401200
--group_end
-@24
-tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.a_q[6:0]
-tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.b_q[6:0]
-tb.core_instance.corelet_instance.mac_array_instance.row_num[4].mac_row_instance.col_num[1].mac_tile_instance.out_s[15:0]
-@22
-tb.core_instance.corelet_instance.sfu_instance.ofifo_dout[63:0]
-tb.core_instance.corelet_instance.mac_array_instance.valid[3:0]
-tb.core_instance.psum_sram_instance.RA[10:0]
-tb.core_instance.psum_sram_instance.WA[10:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[5].mac_row_instance.col_num[1].mac_tile_instance.a_q[3:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[5].mac_row_instance.col_num[1].mac_tile_instance.b_q[3:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[5].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[6].mac_row_instance.col_num[1].mac_tile_instance.a_q[3:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[6].mac_row_instance.col_num[1].mac_tile_instance.b_q[3:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[6].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[7].mac_row_instance.col_num[1].mac_tile_instance.a_q[3:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[7].mac_row_instance.col_num[1].mac_tile_instance.b_q[3:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[7].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[8].mac_row_instance.col_num[1].mac_tile_instance.a_q[3:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[8].mac_row_instance.col_num[1].mac_tile_instance.b_q[3:0]
+tb.core_instance.corelet_instance.mac_array_instance.row_num[8].mac_row_instance.col_num[1].mac_tile_instance.c_q[15:0]
 [pattern_trace] 1
 [pattern_trace] 0

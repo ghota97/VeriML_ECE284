@@ -16,4 +16,5 @@ mac_row.v
 ofifo.v	  
 sfu.v
 sram_128b_w2048.v
+sram_32b_w2048.v
 tb.v		
