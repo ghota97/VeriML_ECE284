@@ -3,8 +3,8 @@ parameter num = 2048;
 parameter num_inp = 8;
 parameter psum_bw = 16;
 parameter bw = 4;
-parameter row = 4;
-parameter col=4;
+parameter row = 8;
+parameter col=8;
  
 input psum_rd;
 reg psum_rd_q;

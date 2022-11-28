@@ -2,8 +2,8 @@ module corelet(clk,reset, acc,relu,inst_w, mode, in_l0,rd_l0,wr_l0,o_full,o_read
     
     parameter psum_bw = 16;
     parameter bw = 4;
-    parameter row = 4;
-    parameter col=4;
+    parameter row = 8;
+    parameter col=8;
  
     input acc,relu;
     input clk,reset;

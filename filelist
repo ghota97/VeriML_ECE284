@@ -10,6 +10,8 @@ fifo_depth8.v
 fifo_mux_2_1.v	
 l0.v		
 mac.v	 
+multiplier.v
+adder.v
 mac_row.v    
 ofifo.v	  
 sfu.v

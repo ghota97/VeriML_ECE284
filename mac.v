@@ -10,9 +10,9 @@ input [bw-1:0] b;  // weight
 input [psum_bw-1:0] c;
 
 
-wire [2*bw:0] product;
-wire [psum_bw-1:0] psum;
-wire [bw:0]   a_pad;
+wire [psum_bw-1:0] product;
+//wire [psum_bw-1:0] psum;
+//wire [bw:0]   a_pad;
 
 
 //output signed [psum_bw-1:0] out;
@@ -25,6 +25,11 @@ wire [bw:0]   a_pad;
 //wire signed [psum_bw-1:0] psum;
 //wire signed [bw:0]   a_pad;
 
-assign out = c + {{(psum_bw-bw){b[bw-1]}},b}*$signed({{(psum_bw-bw){1'b0}},a});
+//multiplier multiplier_instance(.p(product),.a($signed({{(psum_bw-bw){1'b0}},a})) ,.b({{(psum_bw-bw){b[bw-1]}},b}));
+//multiplier multiplier_instance(.p(product),.a(a),.b(b));
+//assign out = c + product;
+assign product = $signed({{(psum_bw-bw){1'b0}},a}) * {{(psum_bw-bw){b[bw-1]}},b};
+carry_select_adder_16bit carry_select_adder_16bit_instance( .a(c),.b(product),.cin(1'b0),.sum(out),.cout());
+//assign out = c + product;
 
 endmodule
