@@ -227,7 +227,7 @@ module tb;
 	                end
 	           end
 	        end
-	        if(err_count == 0)
+	        if(err_count === 0)
 	        	$display("All the outputs matched, QuantConvolution Successfully implemented in Hardware");
 	        $fclose(psum_file);
 	        $fclose(psum_file_ref);
