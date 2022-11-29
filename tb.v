@@ -46,12 +46,12 @@ module tb;
 	integer captured_data_ref;
 	integer psum_file_ref;
 	integer psum_file;
-	integer err_count;
+	integer err_count = 0;
 	reg [bw-1:0] binary;
 	integer i; 
 	integer j; 
 	integer u; 
-	wire iter_done;
+	wire iter_done ;
 	reg start = 0;
 	integer  w[row-1:0][col-1:0];
 	reg psum_rd = 0;
@@ -102,7 +102,7 @@ module tb;
 	initial begin 
 	 	$dumpfile("tb.vcd");
 	 	$dumpvars(0,tb);
-		$display("Simulation about to begin \n");
+		$display("Simulation start = 1 \n");
 		start =0;
 	 	acc = 1;
 		reset = 0; 
@@ -133,6 +133,7 @@ module tb;
 	//		$fclose(w_file);
 		end
 		$fclose(w_file);
+		$display("Loaded Weight SRAM with all the weights required for 3x3 iterations successfully");
         	inp_sram_cenw = 1; 
 		a_file = $fopen("a_data.txt", "r");  //activation data
 		for(iter = 0; iter<kij_len;iter=iter+1) begin
@@ -148,6 +149,7 @@ module tb;
 		 	end
        		end 
 		$fclose(a_file);
+		$display("Loaded Activation SRAM with all the input activations reused for 3x3 iterations successfully \n");
         	inp_sram_ceni = 1; 
         	inp_sram_weni = 1; 
         	inp_sram_wenw = 1; 
@@ -169,13 +171,14 @@ module tb;
 			inp_sram_ceni = 1; 	
 			Ai=0;
 			wait(iter_done);
-			$display("Iter Done Value =%d \n",iter);
+			$display("Loaded Weights and then Activations into L0 Fifo. Mac Array Computation iteration Done, iter value = ",iter);
 			#2 reset = 1'b1;
 			#2 reset = 1'b0;
 		end
 		wait(compute_done);
+		$display("Convolution Done");
 		psum_rd = 1;
-		$display("Reading from psum to output.txt");
+		$display("Reading from psum to output_psum.txt");
 		out_file = $fopen("output_psum.txt","w");
 		for (i=0; i <num_inp; i++)begin
 			#2;
@@ -202,7 +205,7 @@ module tb;
 
 	        psum_file_ref = $fopen("sum_ref.txt", "r");  //psum data
 	        psum_file = $fopen("output_psum.txt", "r");  //psum data
-	        err_count = 0;
+		$display("Comparing output_psum.txt to psum_ref.txt");
 	        for (i=0; i<num_inp; i=i+1) begin
 	           for (j=0; j<col; j=j+1) begin
 	           	    w_scan_file_ref = $fscanf(psum_file_ref, "%d\n", captured_data_ref);	
@@ -215,7 +218,7 @@ module tb;
 	           end
 	        end
 	        if(err_count == 0)
-	        	$display("All the outputs matched");
+	        	$display("All the outputs matched, QuantConvolution Successfully implemented in Hardware");
 	        $fclose(psum_file);
 	        $fclose(psum_file_ref);
 	        $finish;
