@@ -16,6 +16,7 @@ module tb;
     	reg inp_sram_weni = 0;
     	reg inp_sram_cenw = 0;
     	reg inp_sram_wenw = 0;
+	reg clk_gating_enable = 0;
 	wire psum_wr;
 	wire relu;
 	wire [col*psum_bw-1:0]psum_mem_dout;
@@ -63,8 +64,13 @@ module tb;
 	.rd(rd),
 	.mode(mode),
 	.inst_w(inst_w),
+	.clk_gating_enable(clk_gating_enable),
+	.clk_gating_enable_sramw(inp_sram_cenw),
+	.clk_gating_enable_srami(inp_sram_ceni),
 	.compute_done(compute_done),
-	.iter_done(iter_done)
+	.iter_done(iter_done),
+	.sramw_gated_clk(sramw_gated_clk),
+	.srami_gated_clk(srami_gated_clk)
 );
 	
 	core #(.bw(bw),.row(row),.col(col),.psum_bw(psum_bw),.num_inp(num_inp),.num(num)) core_instance(
@@ -92,7 +98,10 @@ module tb;
         	.inp_sram_wenw(inp_sram_wenw),
 		.psum_rd(psum_rd),
 		.psum_mem_dout(psum_mem_dout),
-		.w_x(w_x)
+		.w_x(w_x),
+		.clk_gating_enable(clk_gating_enable),
+		.sramw_gated_clk(sramw_gated_clk),
+		.srami_gated_clk(srami_gated_clk)
 );
 	
 	integer k;
@@ -106,6 +115,7 @@ module tb;
 		#1 start =0;
 	 	acc = 1;
 		reset = 0; 
+		clk_gating_enable = 0;
 		#2 reset = 1; 
 		#2 reset = 0;
 		inp_sram_ceni = 0; inp_sram_cenw=0;
@@ -179,7 +189,7 @@ module tb;
 		$display("Convolution Done");
 		psum_rd = 1;
 		$display("Reading from psum to output_psum.txt");
-		out_file = $fopen("output_psum.txt","w");
+		out_file = $fopen("output_psum_clk_gating_enabled.txt","w");
 		for (i=0; i <num_inp; i++)begin
 			#2;
 			temp = psum_mem_dout[(0+1)*psum_bw-1:psum_bw*0];
@@ -204,7 +214,7 @@ module tb;
 	        psum_rd = 0;
 
 	        psum_file_ref = $fopen("sum_ref.txt", "r");  //psum data
-	        psum_file = $fopen("output_psum.txt", "r");  //psum data
+	        psum_file = $fopen("output_psum_clk_gating_enabled.txt", "r");  //psum data
 		$display("Comparing output_psum.txt to psum_ref.txt");
 	        for (i=0; i<num_inp; i=i+1) begin
 	           for (j=0; j<col; j=j+1) begin

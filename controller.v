@@ -1,14 +1,22 @@
-module controller(clk,reset,start,wr,rd,mode,inst_w,compute_done,iter_done);
+module controller(clk,reset,start,wr,rd,mode,inst_w,clk_gating_enable,clk_gating_enable_sramw,clk_gating_enable_srami,compute_done,iter_done,sramw_gated_clk,srami_gated_clk);
 	parameter num_inp = 64;
 	parameter col = 8;
 	parameter row = 8;
 	parameter kij_len = 9;
 
 	input clk,reset,start;
+	input clk_gating_enable;
+	input clk_gating_enable_sramw;
+	input clk_gating_enable_srami;
+
+	output sramw_gated_clk;
+	output srami_gated_clk;
 	output reg wr,rd,mode;
 	output reg [1:0]inst_w;
 	output reg compute_done;
 	
+	reg clk_gating_flop_signal_sramw;
+	reg clk_gating_flop_signal_srami;
 	reg [7:0] iter,counter;
 	output reg iter_done;
 	reg started;
@@ -45,6 +53,14 @@ module controller(clk,reset,start,wr,rd,mode,inst_w,compute_done,iter_done);
 			counter <= counter +1'b1;
 			end
 	end
+
+	always @ (posedge clk) begin
+		clk_gating_flop_signal_sramw <= !(clk_gating_enable_sramw);
+		clk_gating_flop_signal_srami <= !(clk_gating_enable_srami);
+	end
+
+	assign sramw_gated_clk = clk_gating_enable ? (clk & clk_gating_flop_signal_sramw) : clk;
+	assign srami_gated_clk = clk_gating_enable ? (clk & clk_gating_flop_signal_srami) : clk;
 
 	always@ (posedge clk)begin
 		if(reset)begin
