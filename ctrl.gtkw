@@ -1,0 +1,37 @@
+[*]
+[*] GTKWave Analyzer v3.3.61 (w)1999-2014 BSI
+[*] Tue Nov 29 02:53:47 2022
+[*]
+[dumpfile] "/home/linux/ieng6/ee284fa22/vmediset/VeriML_ECE284/tb.vcd"
+[dumpfile_mtime] "Tue Nov 29 02:53:34 2022"
+[dumpfile_size] 38908666
+[savefile] "/home/linux/ieng6/ee284fa22/vmediset/VeriML_ECE284/ctrl.gtkw"
+[timestart] 1267
+[size] 1536 657
+[pos] -1 -1
+*-6.000000 1350 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb.
+[treeopen] tb.core_instance.
+[treeopen] tb.core_instance.corelet_instance.
+[sst_width] 229
+[signals_width] 158
+[sst_expanded] 1
+[sst_vpaned_height] 159
+@29
+tb.reset
+@28
+tb.core_instance.weight_sram_instance.WEN
+tb.core_instance.input_sram_instance.WEN
+tb.core_instance.corelet_instance.l0_instance.wr
+tb.core_instance.corelet_instance.l0_instance.rd
+tb.core_instance.corelet_instance.mac_array_instance.inst_w[1:0]
+tb.core_instance.corelet_instance.mac_array_instance.mode
+tb.core_instance.corelet_instance.ofifo_instance.o_valid
+tb.core_instance.corelet_instance.sfu_instance.psum_mem_rd
+tb.core_instance.corelet_instance.sfu_instance.psum_mem_wr
+tb.controller_instance.iter_done
+tb.controller_instance.compute_done
+tb.start
+tb.controller_instance.started
+[pattern_trace] 1
+[pattern_trace] 0

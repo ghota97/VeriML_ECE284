@@ -103,7 +103,7 @@ module tb;
 	 	$dumpfile("tb.vcd");
 	 	$dumpvars(0,tb);
 		$display("Simulation start = 1 \n");
-		start =0;
+		#1 start =0;
 	 	acc = 1;
 		reset = 0; 
 		#2 reset = 1; 
@@ -136,18 +136,16 @@ module tb;
 		$display("Loaded Weight SRAM with all the weights required for 3x3 iterations successfully");
         	inp_sram_cenw = 1; 
 		a_file = $fopen("a_data.txt", "r");  //activation data
-		for(iter = 0; iter<kij_len;iter=iter+1) begin
-		 	w_vector_bini = 0;
-		 	for (i=0; i<num_inp; i=i+1) begin
-		 	   for (j=0; j<col; j=j+1) begin
-		 	      w_scan_file = $fscanf(a_file, "%d\n", captured_data);
-		 	      w_vector_bini = {captured_data,w_vector_bini[bw*col-1:bw]};//{binary, w_vector_bin[bw*col-1:bw]};
-		 	      D_2D_in[t][31:0] = w_vector_bini;
-                  	      t++;
-            		    end
-		 	    #2 Ai = Ai + 1;
-		 	end
-       		end 
+		w_vector_bini = 0;
+		for (i=0; i<num_inp; i=i+1) begin
+		   for (j=0; j<col; j=j+1) begin
+		      w_scan_file = $fscanf(a_file, "%d\n", captured_data);
+		      w_vector_bini = {captured_data,w_vector_bini[bw*col-1:bw]};//{binary, w_vector_bin[bw*col-1:bw]};
+		      D_2D_in[t][31:0] = w_vector_bini;
+                      t++;
+            	    end
+		    #2 Ai = Ai + 1;
+		end
 		$fclose(a_file);
 		$display("Loaded Activation SRAM with all the input activations reused for 3x3 iterations successfully \n");
         	inp_sram_ceni = 1; 
@@ -163,11 +161,13 @@ module tb;
 			#2
 			for(i =0;i<row;i++) 
 				#2 Aw = Aw + 1;
+			//#2
 			inp_sram_cenw = 1; 	
 			inp_sram_ceni = 0; 	
 			w_x = 0;
 			for(i =0;i<num_inp;i++) 
 				#2 Ai = Ai + 1;
+			//#2
 			inp_sram_ceni = 1; 	
 			Ai=0;
 			wait(iter_done);
@@ -210,7 +210,7 @@ module tb;
 	           for (j=0; j<col; j=j+1) begin
 	           	    w_scan_file_ref = $fscanf(psum_file_ref, "%d\n", captured_data_ref);	
 	           	    w_scan_file = $fscanf(psum_file, "%d\n", captured_data);	
-	           	    if(captured_data != captured_data_ref)begin
+	           	    if(captured_data !== captured_data_ref)begin
 	        	    	$display(captured_data , captured_data_ref);
 	        	    	$display("Error in Output Generated and Reference at %d Row, %d Column",i+1,j+1);
 	        	    	err_count++;
